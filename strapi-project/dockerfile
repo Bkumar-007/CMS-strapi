@@ -1,0 +1,31 @@
+FROM node:18
+ 
+WORKDIR /app
+ 
+# Install build tools for native module compilation
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+ 
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm install
+ 
+# Copy the rest of the app
+COPY . .
+ 
+# Rebuild better-sqlite3 for the target architecture
+RUN npm rebuild better-sqlite3
+ 
+# Build the Strapi admin panel
+RUN npm run build
+ 
+# Set npm registry (optional)
+RUN npm config set registry http://registry.npmjs.org/
+ 
+# Start Strapi
+CMD ["npm", "start"]
+ 
+EXPOSE 1337

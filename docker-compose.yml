@@ -1,0 +1,20 @@
+services:
+  frontend:
+    build: ./nextjs-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:1337
+
+ 
+  backend:
+    build: ./strapi-project
+    ports:
+      - "1337:1337"
+    env_file:
+      - ./strapi-project/.env  # Load .env file
+    volumes:
+      - ./strapi-project/.tmp:/srv/app/.tmp  # Persist SQLite database
+      - ./strapi-project:/srv/app  # Persist Strapi project files (optional)y
