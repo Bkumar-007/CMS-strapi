@@ -42,13 +42,13 @@ Ensure you have the following installed on your system:
 
 🔹 Backend Setup (Strapi):
 1. Clone the repository:
-   git clone https://github.com/your-repo/strapi-blog-app.git
+
    cd strapi-blog-app
 
-2. Install dependencies:
+1. Install dependencies:
    npm install  # or yarn install
 
-3. Start Strapi server:
+2. Start Strapi server:
    npm run develop  # or yarn develop
 
 🔹 Frontend Setup (Next.js):
